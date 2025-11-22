@@ -11,6 +11,7 @@ A Vite plugin that automatically collects and merges i18n translation files from
 -   🔄 **Hot Module Replacement** - Instant updates when translation files change during development
 -   📦 **Smart Merging** - Combines multiple translation files into unified bundles per language
 -   ⚡ **Easy Configuration** - Works out of the box with minimal setup
+-   🌳 **Tree Shaking** - Source translation files are not included in the build bundle
 
 ## 📦 Installation
 
