@@ -1,4 +1,4 @@
-import { type Plugin } from 'vite'
+import { type Plugin, createLogger } from 'vite'
 import fs from 'fs'
 import path from 'path'
 
@@ -110,7 +110,8 @@ export default function ({
 
                 fs.writeFileSync(filename, JSON.stringify(combinedData), 'utf-8')
             } catch (e) {
-                console.error(e)
+                const logger = createLogger('warn', { prefix: 'vite-plugin-i18n-collector' })
+                logger.error(e as string)
             }
         }
     }
