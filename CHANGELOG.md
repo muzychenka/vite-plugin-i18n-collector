@@ -1,3 +1,12 @@
+# [1.6.0](https://github.com/muzychenka/vite-plugin-i18n-collector/compare/v1.5.0...v1.6.0) (2025-11-22)
+
+
+### Features
+
+* add deep merge ([dab5e98](https://github.com/muzychenka/vite-plugin-i18n-collector/commit/dab5e9891959f3578c70aea35ed35b73fa8b594b))
+* rename plugin ([c0e812b](https://github.com/muzychenka/vite-plugin-i18n-collector/commit/c0e812b88d5a5785efed862f01dda09ced4e53f5))
+* update regex ([349772d](https://github.com/muzychenka/vite-plugin-i18n-collector/commit/349772da1cfcd86a6eb29b363e8945cc17554884))
+
 # [1.5.0](https://github.com/muzychenka/vite-plugin-i18n-collector/compare/v1.4.0...v1.5.0) (2025-11-22)
 
 
