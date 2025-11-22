@@ -1,3 +1,19 @@
+# [1.7.0](https://github.com/muzychenka/vite-plugin-i18n-collector/compare/v1.6.0...v1.7.0) (2025-11-22)
+
+
+### Features
+
+* add more cases to regex ([bc036d6](https://github.com/muzychenka/vite-plugin-i18n-collector/commit/bc036d6396861eba0350db71d3c6cbda21c79949))
+* replace endsWith with regexp ([2b9c911](https://github.com/muzychenka/vite-plugin-i18n-collector/commit/2b9c9117a0329cc47c59fbac5ee71a2c51fe6c91))
+
+# [1.7.0](https://github.com/muzychenka/vite-plugin-i18n-collector/compare/v1.6.0...v1.7.0) (2025-11-22)
+
+
+### Features
+
+* add more cases to regex ([bc036d6](https://github.com/muzychenka/vite-plugin-i18n-collector/commit/bc036d6396861eba0350db71d3c6cbda21c79949))
+* replace endsWith with regexp ([2b9c911](https://github.com/muzychenka/vite-plugin-i18n-collector/commit/2b9c9117a0329cc47c59fbac5ee71a2c51fe6c91))
+
 # [1.6.0](https://github.com/muzychenka/vite-plugin-i18n-collector/compare/v1.5.0...v1.6.0) (2025-11-22)
 
 
