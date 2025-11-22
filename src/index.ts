@@ -97,7 +97,6 @@ export default function ({
                     ...(commonFile ? JSON.parse(commonFile) : {}),
                     ...JSON.parse(content)
                 }
-
                 fs.writeFileSync(filename, JSON.stringify(combinedData), 'utf-8')
             } catch (e) {
                 console.error(e)
