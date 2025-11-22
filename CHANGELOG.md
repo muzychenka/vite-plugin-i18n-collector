@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/muzychenka/vite-plugin-i18n-collector/compare/v1.4.0...v1.5.0) (2025-11-22)
+
+
+### Features
+
+* remove space ([586abbe](https://github.com/muzychenka/vite-plugin-i18n-collector/commit/586abbefb1520399f6f0b4e9049c00cf79c6af7d))
+
 # [1.4.0](https://github.com/muzychenka/vite-plugin-i18n-collector/compare/v1.3.0...v1.4.0) (2025-11-22)
 
 
