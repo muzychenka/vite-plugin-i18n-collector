@@ -34,6 +34,17 @@ function findFilesByRegex(
     return results
 }
 
+function deepMerge(target: any, source: any) {
+    for (const key in source) {
+        if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+            target[key] = target[key] || {}
+            deepMerge(target[key], source[key])
+        } else {
+            target[key] = source[key]
+        }
+    }
+}
+
 export default function ({
     languages,
     saveDir,
@@ -56,7 +67,7 @@ export default function ({
 
                 for (const file of files[language]) {
                     const parsedFile = JSON.parse(fs.readFileSync(file, 'utf8'))
-                    Object.assign(combinedData[language], parsedFile)
+                    deepMerge(combinedData[language], parsedFile)
                 }
 
                 if (!fs.existsSync(saveDir)) {
@@ -94,9 +105,11 @@ export default function ({
                 const filename = path.join(saveDir, `${language}.json`)
                 const commonFile = fs.readFileSync(filename, 'utf-8')
                 const combinedData = {
-                    ...(commonFile ? JSON.parse(commonFile) : {}),
-                    ...JSON.parse(content)
+                    ...(commonFile ? JSON.parse(commonFile) : {})
                 }
+
+                deepMerge(combinedData, JSON.parse(content))
+
                 fs.writeFileSync(filename, JSON.stringify(combinedData), 'utf-8')
             } catch (e) {
                 console.error(e)
