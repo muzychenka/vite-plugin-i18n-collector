@@ -86,7 +86,7 @@ export default function ({
             let language = ''
 
             for (const lang of languages) {
-                if (ctx.file.endsWith(`${lang}.json`)) {
+                if (new RegExp(`(?:^|\\.|-)${lang}(?:\\.json)$`).test(path.basename(ctx.file))) {
                     isProcessable = true
                     language = lang
                     break
