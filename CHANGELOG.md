@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/muzychenka/vite-plugin-i18n-collector/compare/v1.1.0...v1.2.0) (2025-11-22)
+
+
+### Features
+
+* add prettier ([5a2b960](https://github.com/muzychenka/vite-plugin-i18n-collector/commit/5a2b9604958fd140cf7510603e7f95eca6e0506e))
+* update release config ([44b325b](https://github.com/muzychenka/vite-plugin-i18n-collector/commit/44b325b4a004acf27fa3aa6a24458cdba9e70c49))
+
 # [1.1.0](https://github.com/muzychenka/vite-plugin-i18n-collector/compare/v1.0.1...v1.1.0) (2025-11-22)
 
 
