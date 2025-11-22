@@ -1,3 +1,15 @@
+# [1.8.0](https://github.com/muzychenka/vite-plugin-i18n-collector/compare/v1.7.0...v1.8.0) (2025-11-22)
+
+
+### Features
+
+* log errors with vite logger ([54dc694](https://github.com/muzychenka/vite-plugin-i18n-collector/commit/54dc694d2c4abb38421f0702847c0f5388e62d30))
+
+
+### Reverts
+
+* hot update save dir path check ([260ec34](https://github.com/muzychenka/vite-plugin-i18n-collector/commit/260ec3416119448242908d630749062f0ace24d1))
+
 # [1.7.0](https://github.com/muzychenka/vite-plugin-i18n-collector/compare/v1.6.0...v1.7.0) (2025-11-22)
 
 
