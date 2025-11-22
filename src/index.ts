@@ -44,7 +44,7 @@ export default function ({
     lookupDir: string
 }): Plugin {
     return {
-        name: 'translations',
+        name: 'vite-plugin-i18n-collector',
 
         buildStart() {
             const regex = new RegExp('(^' + languages.join('|') + ').json', 'i')
