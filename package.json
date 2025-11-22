@@ -23,6 +23,7 @@
     "author": "Dzmitry Muzychenka",
     "license": "MIT",
     "devDependencies": {
+        "@commitlint/config-conventional": "^20.0.0",
         "@types/node": "^24.10.1",
         "husky": "^9.1.7",
         "typescript": "^5.9.3",
