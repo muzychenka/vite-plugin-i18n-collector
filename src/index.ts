@@ -4,7 +4,6 @@ import path from 'path'
 
 function findFilesByRegex(
     lookupDir: string,
-    regex: RegExp,
     languages: string[],
     results: { [key: string]: string[] } = {}
 ) {
@@ -21,7 +20,7 @@ function findFilesByRegex(
         const stat = fs.statSync(filePath)
 
         if (stat.isDirectory()) {
-            findFilesByRegex(filePath, regex, languages, results)
+            findFilesByRegex(filePath, languages, results)
         } else {
             for (const language of languages) {
                 if (new RegExp(`^${language}.json`).test(file)) {
@@ -58,8 +57,7 @@ export default function ({
         name: 'vite-plugin-i18n-collector',
 
         buildStart() {
-            const regex = new RegExp('(^' + languages.join('|') + ').json', 'i')
-            const files = findFilesByRegex(lookupDir, regex, languages)
+            const files = findFilesByRegex(lookupDir, languages)
             const combinedData: { [key: string]: object } = {}
 
             for (const language of languages) {
