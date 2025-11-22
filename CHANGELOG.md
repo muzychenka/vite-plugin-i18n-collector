@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/muzychenka/vite-plugin-i18n-collector/compare/v1.3.0...v1.4.0) (2025-11-22)
+
+
+### Features
+
+* apply path join ([f42c0e5](https://github.com/muzychenka/vite-plugin-i18n-collector/commit/f42c0e5da202cc50222ec535f839967ccb76377a))
+
 # [1.3.0](https://github.com/muzychenka/vite-plugin-i18n-collector/compare/v1.2.0...v1.3.0) (2025-11-22)
 
 
