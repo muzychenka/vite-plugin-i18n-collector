@@ -23,7 +23,7 @@ function findFilesByRegex(
             findFilesByRegex(filePath, languages, results)
         } else {
             for (const language of languages) {
-                if (new RegExp(`(?:^|\\.|-)${language}(?:\\.json)$`).test(file)) {
+                if (new RegExp(`((\\.|-){1}|^)${language}\.json$`).test(file)) {
                     results[language].push(filePath)
                 }
             }
@@ -78,7 +78,7 @@ export default function ({
         },
 
         async handleHotUpdate(ctx) {
-            if (!ctx.file.endsWith('.json') || ctx.file.startsWith(saveDir)) {
+            if (!ctx.file.endsWith('.json') || ctx.file.includes(saveDir)) {
                 return
             }
 
@@ -86,7 +86,7 @@ export default function ({
             let language = ''
 
             for (const lang of languages) {
-                if (new RegExp(`(?:^|\\.|-)${lang}(?:\\.json)$`).test(path.basename(ctx.file))) {
+                if (new RegExp(`((\\.|-){1}|^)${lang}\.json$`).test(path.basename(ctx.file))) {
                     isProcessable = true
                     language = lang
                     break
