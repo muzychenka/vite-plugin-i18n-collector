@@ -53,6 +53,7 @@ export default function ({
 
             for (const language of languages) {
                 combinedData[language] = {}
+
                 for (const file of files[language]) {
                     const parsedFile = JSON.parse(fs.readFileSync(file, 'utf8'))
                     Object.assign(combinedData[language], parsedFile)
