@@ -23,7 +23,7 @@ function findFilesByRegex(
             findFilesByRegex(filePath, languages, results)
         } else {
             for (const language of languages) {
-                if (new RegExp(`^${language}.json`).test(file)) {
+                if (new RegExp(`(?:^|\\.|-)${language}(?:\\.json)$`).test(file)) {
                     results[language].push(filePath)
                 }
             }
