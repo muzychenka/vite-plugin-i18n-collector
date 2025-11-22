@@ -78,7 +78,7 @@ export default function ({
         },
 
         async handleHotUpdate(ctx) {
-            if (!ctx.file.endsWith('.json') || ctx.file.includes(saveDir)) {
+            if (!ctx.file.endsWith('.json') || ctx.file.startsWith(saveDir)) {
                 return
             }
 
