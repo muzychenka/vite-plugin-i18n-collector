@@ -63,11 +63,8 @@ export default function ({
                     fs.mkdirSync(saveDir, { recursive: true })
                 }
 
-                fs.writeFileSync(
-                    `${saveDir}/${language}.json`,
-                    JSON.stringify(combinedData[language]),
-                    'utf-8'
-                )
+                const filename = path.join(saveDir, `${language}.json`)
+                fs.writeFileSync(filename, JSON.stringify(combinedData[language]), 'utf-8')
             }
         },
 
@@ -94,17 +91,14 @@ export default function ({
             const content = fs.readFileSync(ctx.file, 'utf-8')
 
             try {
-                const commonFile = fs.readFileSync(`${saveDir}/${language}.json`, 'utf-8')
+                const filename = path.join(saveDir, `${language}.json`)
+                const commonFile = fs.readFileSync(filename, 'utf-8')
                 const combinedData = {
                     ...(commonFile ? JSON.parse(commonFile) : {}),
                     ...JSON.parse(content)
                 }
 
-                fs.writeFileSync(
-                    `${saveDir}/${language}.json`,
-                    JSON.stringify(combinedData),
-                    'utf-8'
-                )
+                fs.writeFileSync(filename, JSON.stringify(combinedData), 'utf-8')
             } catch (e) {
                 console.error(e)
             }
