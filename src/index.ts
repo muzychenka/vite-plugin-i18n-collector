@@ -3,12 +3,12 @@ import fs from 'fs'
 import path from 'path'
 
 function findFilesByRegex(
-    dir: string,
+    lookupDir: string,
     regex: RegExp,
     languages: string[],
     results: { [key: string]: string[] } = {}
 ) {
-    const files = fs.readdirSync(dir)
+    const files = fs.readdirSync(lookupDir)
 
     if (!Object.keys(results).length) {
         for (const language of languages) {
@@ -17,7 +17,7 @@ function findFilesByRegex(
     }
 
     for (const file of files) {
-        const filePath = path.join(dir, file)
+        const filePath = path.join(lookupDir, file)
         const stat = fs.statSync(filePath)
 
         if (stat.isDirectory()) {
