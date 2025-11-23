@@ -2,7 +2,7 @@ import { type Plugin } from 'vite'
 import fs from 'fs'
 import path from 'path'
 
-function findFilesByRegex(
+function findAllLanguagesFiles(
     lookupDir: string,
     saveDir: string,
     languages: string[],
@@ -21,7 +21,7 @@ function findFilesByRegex(
         const stat = fs.statSync(filePath)
 
         if (stat.isDirectory()) {
-            findFilesByRegex(filePath, saveDir, languages, results)
+            findAllLanguagesFiles(filePath, saveDir, languages, results)
         } else {
             for (const language of languages) {
                 if (langRegex(language).test(file) && !filePath.startsWith(saveDir)) {
@@ -92,7 +92,7 @@ export default function ({
         name: 'vite-plugin-i18n-collector',
 
         buildStart() {
-            const files = findFilesByRegex(lookupDir, saveDir, languages)
+            const files = findAllLanguagesFiles(lookupDir, saveDir, languages)
             const combinedData: { [key: string]: object } = {}
 
             for (const language of languages) {
