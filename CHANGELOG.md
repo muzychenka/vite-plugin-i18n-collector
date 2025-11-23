@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/muzychenka/vite-plugin-i18n-collector/compare/v1.8.0...v1.9.0) (2025-11-23)
+
+
+### Features
+
+* rewrite nested keys ([15ea509](https://github.com/muzychenka/vite-plugin-i18n-collector/commit/15ea509b19506a39e30fcec28e84cd84533a5e23))
+
 # [1.8.0](https://github.com/muzychenka/vite-plugin-i18n-collector/compare/v1.7.0...v1.8.0) (2025-11-22)
 
 
