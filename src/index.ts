@@ -73,7 +73,7 @@ function deepMerge(target: any, source: any) {
     }
 }
 
-function createIfNoFolder(path: string) {
+function ensureDir(path: string) {
     if (!fs.existsSync(path)) {
         fs.mkdirSync(path, { recursive: true })
     }
@@ -103,7 +103,7 @@ export default function ({
                     deepMerge(combinedData[language], parsedFile)
                 }
 
-                createIfNoFolder(saveDir)
+                ensureDir(saveDir)
 
                 const filename = path.join(saveDir, `${language}.json`)
                 fs.writeFileSync(filename, JSON.stringify(combinedData[language]), 'utf-8')
@@ -133,7 +133,7 @@ export default function ({
             const languageFiles = findLanguageFiles(lookupDir, saveDir, language)
             const combinedData = {}
 
-            createIfNoFolder(saveDir)
+            ensureDir(saveDir)
 
             for (const languageFile of languageFiles) {
                 const parsedFile = JSON.parse(fs.readFileSync(languageFile, 'utf8'))
