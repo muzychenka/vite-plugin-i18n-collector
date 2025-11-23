@@ -1,9 +1,10 @@
-import { type Plugin, createLogger } from 'vite'
+import { type Plugin } from 'vite'
 import fs from 'fs'
 import path from 'path'
 
 function findFilesByRegex(
     lookupDir: string,
+    saveDir: string,
     languages: string[],
     results: { [key: string]: string[] } = {}
 ) {
@@ -20,10 +21,10 @@ function findFilesByRegex(
         const stat = fs.statSync(filePath)
 
         if (stat.isDirectory()) {
-            findFilesByRegex(filePath, languages, results)
+            findFilesByRegex(filePath, saveDir, languages, results)
         } else {
             for (const language of languages) {
-                if (new RegExp(`((\\.|-){1}|^)${language}\.json$`).test(file)) {
+                if (langRegex(language).test(file) && !filePath.startsWith(saveDir)) {
                     results[language].push(filePath)
                 }
             }
@@ -31,6 +32,34 @@ function findFilesByRegex(
     }
 
     return results
+}
+
+function findLanguageFiles(
+    lookupDir: string,
+    saveDir: string,
+    language: string,
+    results: string[] = []
+) {
+    const files = fs.readdirSync(lookupDir)
+
+    for (const file of files) {
+        const filePath = path.join(lookupDir, file)
+        const stat = fs.statSync(filePath)
+
+        if (stat.isDirectory()) {
+            findLanguageFiles(filePath, saveDir, language, results)
+        } else {
+            if (langRegex(language).test(file) && !filePath.startsWith(saveDir)) {
+                results.push(filePath)
+            }
+        }
+    }
+
+    return results
+}
+
+function langRegex(language: string) {
+    return new RegExp(`((\\.|-){1}|^)${language}\.json$`)
 }
 
 function deepMerge(target: any, source: any) {
@@ -41,6 +70,12 @@ function deepMerge(target: any, source: any) {
         } else {
             target[key] = source[key]
         }
+    }
+}
+
+function createIfNoFolder(path: string) {
+    if (!fs.existsSync(path)) {
+        fs.mkdirSync(path, { recursive: true })
     }
 }
 
@@ -57,7 +92,7 @@ export default function ({
         name: 'vite-plugin-i18n-collector',
 
         buildStart() {
-            const files = findFilesByRegex(lookupDir, languages)
+            const files = findFilesByRegex(lookupDir, saveDir, languages)
             const combinedData: { [key: string]: object } = {}
 
             for (const language of languages) {
@@ -68,9 +103,7 @@ export default function ({
                     deepMerge(combinedData[language], parsedFile)
                 }
 
-                if (!fs.existsSync(saveDir)) {
-                    fs.mkdirSync(saveDir, { recursive: true })
-                }
+                createIfNoFolder(saveDir)
 
                 const filename = path.join(saveDir, `${language}.json`)
                 fs.writeFileSync(filename, JSON.stringify(combinedData[language]), 'utf-8')
@@ -86,7 +119,7 @@ export default function ({
             let language = ''
 
             for (const lang of languages) {
-                if (new RegExp(`((\\.|-){1}|^)${lang}\.json$`).test(path.basename(ctx.file))) {
+                if (langRegex(lang).test(path.basename(ctx.file))) {
                     isProcessable = true
                     language = lang
                     break
@@ -97,22 +130,18 @@ export default function ({
                 return
             }
 
-            const content = fs.readFileSync(ctx.file, 'utf-8')
+            const languageFiles = findLanguageFiles(lookupDir, saveDir, language)
+            const combinedData = {}
 
-            try {
-                const filename = path.join(saveDir, `${language}.json`)
-                const commonFile = fs.readFileSync(filename, 'utf-8')
-                const combinedData = {
-                    ...(commonFile ? JSON.parse(commonFile) : {})
-                }
+            createIfNoFolder(saveDir)
 
-                deepMerge(combinedData, JSON.parse(content))
-
-                fs.writeFileSync(filename, JSON.stringify(combinedData), 'utf-8')
-            } catch (e) {
-                const logger = createLogger('warn', { prefix: 'vite-plugin-i18n-collector' })
-                logger.error(e as string)
+            for (const languageFile of languageFiles) {
+                const parsedFile = JSON.parse(fs.readFileSync(languageFile, 'utf8'))
+                deepMerge(combinedData, parsedFile)
             }
+
+            const filename = path.join(saveDir, `${language}.json`)
+            fs.writeFileSync(filename, JSON.stringify(combinedData), 'utf-8')
         }
     }
 }
