@@ -7,11 +7,11 @@ A Vite plugin that automatically collects and merges i18n translation files from
 
 ## ✨ Features
 
--   🔍 **Automatic Discovery** - Recursively finds all translation files matching your language patterns
--   🔄 **Hot Module Replacement** - Instant updates when translation files change during development
--   📦 **Smart Merging** - Combines multiple translation files into unified bundles per language
--   ⚡ **Easy Configuration** - Works out of the box with minimal setup
--   🌳 **Tree Shaking** - Source translation files are not included in the build bundle
+- 🔍 **Automatic Discovery** - Recursively finds all translation files matching your language patterns
+- 🔄 **Hot Module Replacement** - Instant updates when translation files change during development
+- 📦 **Smart Merging** - Combines multiple translation files into unified bundles per language
+- ⚡ **Easy Configuration** - Works out of the box with minimal setup
+- 🌳 **Tree Shaking** - Source translation files are not included in the build bundle
 
 ## 📦 Installation
 
@@ -55,7 +55,11 @@ export default defineConfig({
 
 ## 📁 File Structure
 
-The plugin searches for files matching the pattern `{language}.json` (e.g., `en.json`, `en.json`) in the `lookupDir` and all its subdirectories.
+The plugin searches for files matching the following patterns in the `lookupDir` and all its subdirectories:
+
+- `{language}.json` (e.g., `en.json`)
+- `{name}-{language}.json` (e.g., `component-en.json`)
+- `{name}.{language}.json` (e.g., `component.en.json`)
 
 ### Example Structure
 
